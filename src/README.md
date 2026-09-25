@@ -6,6 +6,7 @@ A super simple FastAPI application that allows students to view and sign up for 
 
 - View all available extracurricular activities
 - Sign up for activities
+- Display active announcements and manage them while signed in
 
 ## Getting Started
 
@@ -29,8 +30,16 @@ A super simple FastAPI application that allows students to view and sign up for 
 
 | Method | Endpoint                                                          | Description                                                         |
 | ------ | ----------------------------------------------------------------- | ------------------------------------------------------------------- |
+| POST   | `/auth/login?username=...&password=...`                           | Sign in and receive a bearer session token                          |
+| GET    | `/auth/check-session?username=...`                                | Validate the signed-in user's bearer session                        |
+| POST   | `/auth/logout`                                                    | Invalidate the current bearer session                                |
 | GET    | `/activities`                                                     | Get all activities with their details and current participant count |
 | POST   | `/activities/{activity_name}/signup?email=student@mergington.edu` | Sign up for an activity                                             |
+| GET    | `/announcements`                                                  | Get announcements within their start and expiration dates            |
+| GET    | `/announcements/manage`                                            | List all announcements (requires a bearer session token)              |
+| POST   | `/announcements`                                                   | Create an announcement (requires a bearer session token)              |
+| PUT    | `/announcements/{announcement_id}`                                 | Modify an announcement (requires a bearer session token)               |
+| DELETE | `/announcements/{announcement_id}`                                | Delete an announcement (requires a bearer session token)               |
 
 ## Data Model
 

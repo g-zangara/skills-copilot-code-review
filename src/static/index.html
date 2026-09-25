@@ -12,9 +12,7 @@
     />
   </head>
   <body>
-    <div class="announcement-banner">
-      📢 Activity registration is open until the end of the month. Don't lose your spot!
-    </div>
+    <div id="announcement-banner" class="announcement-banner hidden" aria-live="polite"></div>
     <header>
       <h1>Mergington High School</h1>
       <h2>Extracurricular Activities</h2>
@@ -26,6 +24,10 @@
           </button>
           <div id="user-info" class="hidden">
             <span id="display-name"></span>
+            <button id="manage-announcements-button" class="icon-button hidden" type="button">
+              <span aria-hidden="true">&#9881;</span>
+              <span>Announcements</span>
+            </button>
             <button id="logout-button">Logout</button>
           </div>
         </div>
@@ -134,6 +136,47 @@
           <button type="submit">Login</button>
         </form>
         <div id="login-message" class="hidden message"></div>
+      </div>
+    </div>
+
+    <!-- Announcement management dialog -->
+    <div id="announcements-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="announcements-title">
+      <div class="modal-content announcement-manager-content">
+        <button id="close-announcements-modal" class="dialog-close" type="button" aria-label="Close announcements">&times;</button>
+        <div class="announcement-manager-heading">
+          <div>
+            <p class="eyebrow">SCHOOL BULLETIN</p>
+            <h3 id="announcements-title">Announcements</h3>
+          </div>
+          <button id="new-announcement-button" class="new-announcement-button" type="button"><span aria-hidden="true">+</span> New announcement</button>
+        </div>
+        <div class="announcement-manager-layout">
+          <section class="announcement-list-panel" aria-label="Existing announcements">
+            <div id="announcement-list" class="announcement-list"></div>
+          </section>
+          <section class="announcement-editor-panel" aria-label="Announcement editor">
+            <h4 id="announcement-editor-title">Create announcement</h4>
+            <form id="announcement-form">
+              <label for="announcement-message">Message</label>
+              <textarea id="announcement-message" maxlength="500" rows="5" required placeholder="Write a clear, useful update..."></textarea>
+              <div class="announcement-date-fields">
+                <div class="form-group">
+                  <label for="announcement-start-date">Start date <span>Optional</span></label>
+                  <input id="announcement-start-date" type="date" />
+                </div>
+                <div class="form-group">
+                  <label for="announcement-expires-at">Expiration date <span>Required</span></label>
+                  <input id="announcement-expires-at" type="date" required />
+                </div>
+              </div>
+              <p id="announcement-form-message" class="form-feedback hidden" role="status"></p>
+              <div class="announcement-form-actions">
+                <button id="cancel-announcement-edit" class="cancel-btn" type="button">Cancel</button>
+                <button id="save-announcement-button" class="save-announcement-button" type="submit">Publish announcement</button>
+              </div>
+            </form>
+          </section>
+        </div>
       </div>
     </div>
 
